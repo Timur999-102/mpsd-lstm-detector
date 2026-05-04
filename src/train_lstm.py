@@ -45,6 +45,10 @@ os.makedirs(LOGS_PATH, exist_ok=True)
 print(f"📁 PROJECT_ROOT: {PROJECT_ROOT}")
 print(f"📁 MODELS_PATH: {MODELS_PATH}")
 
+
+#Переопределяем точку входа
+os.environ['CLEARML_SCRIPT_ENTRY_POINT'] = 'src/train_lstm.py'
+
 # === ClearML Task ===
 task = Task.init(
     project_name="PowerShell_Malware_Detection",
@@ -54,8 +58,8 @@ task = Task.init(
     reuse_last_task_id=False,
 
     # 🔥 Для консистентности (опционально):
-    script_repo="https://github.com/Timur999-102/mpsd-lstm-detector.git",
-    script_path="src/train_lstm.py"
+    #script_repo="https://github.com/Timur999-102/mpsd-lstm-detector.git",
+    #script_path="src/train_lstm.py"
 )
 
 # Гиперпараметры
@@ -71,7 +75,7 @@ task.connect_configuration({
 })
 
 # 🔥 Для локального запуска — закомментировано!
-task.execute_remotely(queue_name="default")
+#task.execute_remotely(queue_name="default")
 
 logger = task.get_logger()
 
