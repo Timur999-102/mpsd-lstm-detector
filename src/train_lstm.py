@@ -12,6 +12,19 @@ import tensorflow as tf
 from tensorflow.keras import layers, models, callbacks
 from clearml import Task, Dataset
 
+# === Диагностика импортов (добавь в начало src/train_lstm.py) ===
+print(f"🐍 Python: {sys.version}")
+print(f"📁 CWD: {os.getcwd()}")
+print(f"📄 Executing: {__file__}")
+
+try:
+    from clearml import Task, Dataset
+    print("✅ ClearML imports: OK")
+except ImportError as e:
+    print(f"❌ Import error: {e}")
+    sys.exit(1)
+# === Конец диагностики ===
+
 # === Оптимизация для стабильности ===
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Подавить лишние предупреждения TF
@@ -38,7 +51,11 @@ task = Task.init(
     task_name="LSTM_Local_Training",  # 🔥 Имя для локального запуска
     task_type=Task.TaskTypes.training,
     output_uri=MODELS_PATH,  # 🔥 Сохранять артефакты в папку models/
-    reuse_last_task_id=False
+    reuse_last_task_id=False,
+
+    # 🔥 Для консистентности (опционально):
+    script_repo="https://github.com/Timur999-102/mpsd-lstm-detector.git",
+    script_path="src/train_lstm.py"
 )
 
 # Гиперпараметры
