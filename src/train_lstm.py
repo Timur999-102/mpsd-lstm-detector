@@ -5,12 +5,13 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from clearml import Task, Dataset
+import tensorflow as tf
+from tensorflow.keras import layers, models, callbacks
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support, roc_auc_score, confusion_matrix, roc_curve
-import tensorflow as tf
-from tensorflow.keras import layers, models, callbacks
-from clearml import Task, Dataset
+
 
 # === Диагностика импортов (добавь в начало src/train_lstm.py) ===
 print(f"🐍 Python: {sys.version}")
@@ -30,8 +31,8 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Подавить лишние предупреждения TF
 
 # 🔐 ClearML API-ключи
-os.environ['CLEARML_API_ACCESS_KEY'] = 'S78S76DYLI0C6AM97ASTOHIEECNNX2'
-os.environ['CLEARML_API_SECRET_KEY'] = 'i52pJEwFecfPR2dlK9DY53V0IbfG7jUgiEYeSycmtSx80wJlfXIGPpuEpuHoBikMDdY'
+os.environ['CLEARML_API_ACCESS_KEY'] = '39WI1SAP1Q9O421IIY5FNDKUN08TCC'
+os.environ['CLEARML_API_SECRET_KEY'] = '0_jQ5Ft-e_WF3atlZzPs-fP73yi2tdI_-PrhwAS93zt4lBhx_-p3RxdzFqb6laqymw4'
 os.environ['CLEARML_API_HOST'] = 'https://api.clear.ml'
 
 # === Настройка путей ===
